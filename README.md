@@ -37,7 +37,7 @@ A simple Flask web application that displays blog posts fetched from an API endp
    ```
 
 4. 🌐 Open your browser and navigate to `http://localhost:5000`
-5. 
+   
 
 ## 📁 File Structure
 
