@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% block content %}
+<!-- Main Content-->
+<main class="mb-4">
+    <div class="container px-4 px-lg-5">
+        <div class="row gx-4 gx-lg-5 justify-content-center">
+            <div class="col-md-10 col-lg-8 col-xl-7">
+                <div class="my-5">
+                    <!-- Display flash messages -->
+                    {% with messages = get_flashed_messages(with_categories=true) %}
+                        {% if messages %}
+                            {% for category, message in messages %}
+                                <div class="alert alert-{{ category }}">{{ message }}</div>
+                            {% endfor %}
+                        {% endif %}
+                    {% endwith %}
+                    
+                    <h2>Your Profile</h2>
+                    <div class="my-5">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title">{{ session.get('name', 'User') }}</h5>
+                                <h6 class="card-subtitle mb-2 text-muted">{{ session.get('email') }}</h6>
+                                <p class="card-text">Member since: {{ session.get('created_at', 'Unknown') }}</p>
+                                <a href="{{ url_for('logout') }}" class="btn btn-outline-danger">Log Out</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+{% endblock %}
