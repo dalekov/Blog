@@ -1,57 +1,118 @@
-# 📝 Flask Blog API App
+# Flask Blog with Authentication
 
-A simple Flask web application that displays blog posts fetched from an API endpoint.
+A clean, responsive blog platform built with Flask and SQLite authentication.
 
-## ✨ Features
+## Features
 
-- 🏠 Home page displaying all blog posts
-- 📄 Individual post pages with full content
-- ℹ️ About page with site information
-- 📞 Contact page
-- 🔄 Dynamic content from external API
+- User authentication system (signup, login, logout)
+- User profile pages
+- Contact form with email integration
+- Dynamic blog content from API
+- Responsive design using Bootstrap 5
+- Flash message notifications
+- Secure password storage using hashing
 
-## 🚀 Getting Started
+## Installation
 
-### Prerequisites
-
-- Python 3.6+
-- Flask
-- Requests
-
-### 🔧 Installation
-
-1. Clone this repository:
-   ```bash
-   git clone https://github.com/yourusername/flask-blog-api.git
-   cd flask-blog-api
+1. Clone the repository:
+   ```
+   git clone https://github.com/yourusername/flask-blog.git
+   cd flask-blog
    ```
 
 2. Install dependencies:
-   ```bash
-   pip install flask requests
+   ```
+   pip install flask werkzeug requests
    ```
 
 3. Run the application:
-   ```bash
+   ```
    python app.py
    ```
 
-4. 🌐 Open your browser and navigate to `http://localhost:5000`
-   
+4. Access the blog at:
+   ```
+   http://localhost:7000
+   ```
 
-## 📁 File Structure
+## Project Structure
 
 ```
-flask-blog-api/
-├── app.py              # Main Flask application
-├── templates/          # HTML templates
-│   ├── index.html      # Home page template
-│   ├── post.html       # Individual post template
-│   ├── about.html      # About page template
-│   └── contact.html    # Contact page template
-└── static/             # Static files (CSS, images, etc.)
+flask-blog/
+├── app.py                 # Main Flask application
+├── blog.db                # SQLite database (created automatically)
+├── static/                # Static files (CSS, JS, images)
+│   ├── css/
+│   ├── js/
+│   └── assets/
+└── templates/             # HTML templates
+    ├── base.html          # Base template with layout structure
+    ├── index.html         # Homepage with blog posts
+    ├── about.html         # About page
+    ├── contact.html       # Contact form
+    ├── post.html          # Individual blog post
+    ├── login.html         # Login form
+    ├── signup.html        # Signup form
+    ├── profile.html       # User profile page
+    └── footer.html        # Footer include
 ```
 
----
+## Authentication System
 
-Happy blogging! ✍️ 📱 🎉
+The blog uses a SQLite database with secure password hashing through Werkzeug's security features:
+
+- User information is stored in the `users` table
+- Passwords are hashed before storage
+- Session management for logged-in users
+- Protection against duplicate emails
+- Flash messages for user feedback
+
+## Template Structure
+
+Templates follow a hierarchical structure:
+
+- `base.html`: Contains the basic HTML structure, navigation, and footer includes
+- Other templates extend `base.html` and override content blocks
+
+## Configuration
+
+To configure the application:
+
+1. Set a secure secret key in `app.py`:
+   ```python
+   app.secret_key = "your-random-secure-key"
+   ```
+
+2. Update email settings for the contact form in `app.py`:
+   ```python
+   my_email = "your-email@gmail.com"
+   my_password = "your-app-password"
+   ```
+
+## API Integration
+
+Blog posts are fetched from an external API endpoint. To change the data source:
+
+1. Update the `API_ENDPOINT` variable in `app.py`:
+   ```python
+   API_ENDPOINT = "your-api-endpoint"
+   ```
+
+## Security Notes
+
+- Passwords are securely hashed using Werkzeug's `generate_password_hash`
+- Email uniqueness is enforced at the database level
+- Session management for tracking logged-in users
+- Protection against SQL injection using parameterized queries
+
+## Future Enhancements
+
+- Email verification for new accounts
+- Password reset functionality
+- User roles/permissions
+- Comment system for blog posts
+- User profile image uploads
+
+## License
+
+[MIT License](LICENSE)
